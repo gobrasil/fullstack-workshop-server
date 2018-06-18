@@ -5,7 +5,7 @@
 var jest = require('jest-cli');
 
 const jestConfig = {
-  rootDir: 'source',
+  rootDir: './',
 };
 
 jest.runCLI({ config: jestConfig }, '.', () => {});

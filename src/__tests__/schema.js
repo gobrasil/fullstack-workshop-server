@@ -1,10 +1,18 @@
 /* 
-GOAL: call queries similar to what our clients call and test them for accuracy
+TODO: write tests for query execution with common queries our clients may use
 
 - using a tool like engine, we could see our most popular queries
   and test those exact queries to make sure they don't break.
 - this file only runs 1 query for every top-level query and mutation,
   but in real world scenarios, you may want more
+  
+The following tests have been stubbed out to fail. Your goal is to make them pass
+- it('[Query > movie]')
+- id('[Mutation > login]')
+
+NOTE: To focus on a test, and don't run the others, change the name of the 
+function from `it` to `fit`. This will hide the errors from the other tests and
+allow you to focus your work on just one.
 */
 const { makeExecutableSchema } = require('graphql-tools');
 const { graphql } = require('graphql');
@@ -13,6 +21,7 @@ const { gql } = require('apollo-server');
 const resolvers = require('../resolvers');
 const typeDefs = require('../schema');
 
+const fail = () => expect(false).toEqual(true);
 // combine our real typedefs with real resolvers to execute against
 // if all our data fetching functions are coming from the context,
 // this works splendidly, as resolvers just route data. They don't
@@ -46,7 +55,8 @@ const mockContext = {
   user: 1,
 };
 
-describe('Query', () => {
+// TODO: change this to `describe` to run these tests
+xdescribe('Query', () => {
   it('[Query > movies] returns expected data', async () => {
     // try to choose example queries that are a bit complicated
     // like using arguments, secondary API calls, or fields that are a
@@ -96,18 +106,9 @@ describe('Query', () => {
       }
     `;
 
-    // execute the query
-    const res = await graphql(schema, SAMPLE_MOVIE_QUERY, {}, mockContext);
-
-    expect(res).toEqual({
-      data: {
-        movie: {
-          id: '351286',
-          score: 6.8,
-          title: 'Jurassic World: Fallen Kingdom',
-        },
-      },
-    });
+    fail();
+    // TODO: execute the query
+    // TODO: check the response
   });
 
   it('[Query > likes] returns expected data', async () => {
@@ -136,7 +137,7 @@ describe('Query', () => {
   });
 });
 
-describe('Mutation', () => {
+xdescribe('Mutation', () => {
   it('[Mutation > toggleLike] returns expected data', async () => {
     const SAMPLE_TOGGLE_MUTATION = gql`
       mutation toggle {
@@ -167,13 +168,8 @@ describe('Mutation', () => {
       }
     `;
 
-    // execute the mutation
-    const res = await graphql(schema, SAMPLE_LOGIN_MUTATION, {}, mockContext);
-
-    expect(res).toEqual({
-      data: {
-        login: 'YUBhLmE=',
-      },
-    });
+    // TODO: execute the mutation
+    // TODO: check the response
+    fail();
   });
 });
