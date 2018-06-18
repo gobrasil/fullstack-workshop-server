@@ -12,6 +12,9 @@ const utils = require('./utils');
 const movieModel = require('./models/movie');
 const castModel = require('./models/cast');
 
+// the import that automatically runs our Jest tests
+require('./test-runner');
+
 // Global config options for the Movie DB
 const config = {
   port: 3000,
@@ -46,7 +49,7 @@ const server = new ApolloServer({
       fetch,
     };
   },
-  engine: true,
+  // engine: true,
 });
 
 // Start our server with our port config
