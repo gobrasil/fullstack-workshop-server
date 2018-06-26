@@ -24,12 +24,22 @@ const config = {
 };
 
 // Initialize data models and pass dependencies
-const models = {
-  movie: movieModel({ config, utils, store, loaders: makeLoaders() }),
-  cast: castModel({ config, utils, loaders: makeLoaders() }),
-};
+const context = ({ req }) => {
+  const fetch = utils.makeFetch(config);
+  const loaders = makeLoaders(fetch);
 
-const context = { models, user: 'a@a.com' };
+  // Initialize data models and pass dependencies
+  const models = {
+    movie: movieModel({ config, utils, store, loaders }),
+    cast: castModel({ config, utils, loaders }),
+  };
+
+  return {
+    models,
+    user: 'a@a.com',
+    fetch,
+  };
+};
 
 // Set up Apollo Server
 
