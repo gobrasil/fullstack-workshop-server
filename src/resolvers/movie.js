@@ -40,10 +40,10 @@ module.exports = {
       poster_path && `https://image.tmdb.org/t/p/w${size}${poster_path}`,
     genres: ({ genres }) => (genres ? genres.map(g => g.name) : []),
     releaseDate: ({ release_date }) => release_date,
-    cast: ({ id }, _, { models }) => models.cast.getCastByMovie(id),
-    isLiked: ({ id }, _, { models, user }) => {
+    cast: ({ id }, _, { dataSources }) => dataSources.imdb.getCastByMovie(id),
+    isLiked: ({ id }, _, { dataSources, user }) => {
       if (!user) return false;
-      return models.movie.isMovieLiked({ user, id });
-    },
-  },
+      return dataSources.likes.isMovieLiked({ user, id });
+    }
+  }
 };
