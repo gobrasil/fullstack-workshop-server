@@ -12,7 +12,7 @@ class IMDB extends RESTDataSource {
   }
 
   async getMovieById(id) {
-    return this.get(`movie/${id}`);
+    return this.get(`/movie/${id}`);
   }
 
   async getMovies({ sort, page }) {
@@ -20,13 +20,13 @@ class IMDB extends RESTDataSource {
     if (sort === "POPULARITY") sortParam = "popularity.desc";
     else if (sort === "RELEASE_DATE") sortParam = "release_date.desc";
 
-    return this.get("discover/movie", { page, sort_by: sortParam }).then(
+    return this.get("/discover/movie", { page, sort_by: sortParam }).then(
       json => json.results || []
     );
   }
 
   async getCastByMovie(id) {
-    return this.get(`movie/${id}/credits`).then(json => json.cast || []);
+    return this.get(`/movie/${id}/credits`).then(json => json.cast || []);
   }
 }
 

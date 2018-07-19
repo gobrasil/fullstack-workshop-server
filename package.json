@@ -5,8 +5,8 @@
     "start": "node src/server.js"
   },
   "dependencies": {
-    "apollo-datasource-rest": "^2.0.0-rc.7",
-    "apollo-server": "^2.0.0-rc.7",
+    "apollo-datasource-rest": "^0.1.0",
+    "apollo-server": "^2.0.0",
     "dotenv": "^5.0.1",
     "graphql": "^0.13.2",
     "isemail": "^3.1.2",
